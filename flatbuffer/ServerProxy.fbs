@@ -1,0 +1,44 @@
+include "ResponseMessage.fbs";
+
+namespace ServerProxy;
+
+enum AUTH_STATUS : int {
+    UNKNOWN = 0,
+    SUCCESS = 1,
+    FAILURE = 2,
+}
+
+table Header {
+    country:string; //Clients country
+    state:string; //Clients state
+    city:string; //Clients city
+    source:string;
+    dest:string;
+}
+
+table AuthReqMsg {
+    country:string; //Clients country
+    state:string; //Clients state
+    city:string; //Clients city
+    source:string;
+    dest:string;
+    secretkey:string;
+}
+
+table AuthRespMsg {
+    country:string; //Clients country
+    state:string; //Clients state
+    city:string; //Clients city
+    source:string;
+    dest:string;
+    status:int;
+}
+
+union Payload {AuthReqMsg, AuthRespMsg, ResponseMessage.ResponseMsg}
+
+table ProxyMsg {
+    header:Header;
+    payload:Payload;
+}
+
+root_type ProxyMsg; 

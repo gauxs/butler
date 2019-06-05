@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export NODE_PATH=/usr/local/lib/node_modules
+cd /root/Butler/server_proxy
+exec nodejs proxy_server >> "/var/log/server_proxy.log" 2>&1 
