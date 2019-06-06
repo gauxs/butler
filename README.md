@@ -1,19 +1,22 @@
 # Butler
 To install cmake
-1. apt install cmake
+apt install cmake
 
 To install Flatbuffer
-1. cd tools/
-2. git clone https://github.com/google/flatbuffers.git
-3. cd flatbuffers
-4. cmake -G "Unix Makefiles" (install cmake if need)
-5. make
+cd tools/
+git clone https://github.com/google/flatbuffers.git
+cd flatbuffers
+cmake -G "Unix Makefiles" (install cmake if need)
+make
 
 To install npm & required modules
-1. apt install npm
-2. npm install redis
-3. npm install log4js
-4. npm install express-ws
-5. npm install express
+apt install npm
+npm install redis
+npm install log4js
+npm install express-ws
+npm install express
 NOTE: All npm modules goes to "/usr/local/lib/node_modules/"
 
+To install nodejs
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
