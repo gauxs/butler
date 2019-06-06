@@ -1,0 +1,14 @@
+namespace ResponseCoupon;
+
+table coupon {
+    coupon_code: string;
+    coupon_percentage: string;
+}
+
+table ResponseCouponMsg {
+    coupon_for_app: string;
+    coupon_from: string;
+    coupon_list: [coupon];
+}
+
+root_type ResponseCouponMsg;

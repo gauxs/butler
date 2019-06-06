@@ -3,9 +3,9 @@
 var logger = require('./logger.js');
 var log = logger.LOG;
 var proxy_fb_handle = require('./proxy_fb_handler');
-var redis_conn = require('./redis_connector');
+//var redis_conn = require('./redis_connector');
 var conn_mgr = require('./connection_mgr');
-var flatbuffers = require('./flatbuffers').flatbuffers; 
+var flatbuffers = require('../tools/flatbuffers/js/flatbuffers').flatbuffers; 
 var ServerProxy = require('../flatbuffer/js_defs/ServerProxy_generated').ServerProxy;
 var http = require('http');
 var app = require('express')();
@@ -32,7 +32,7 @@ var handle_msg_from_svc = function(channel, enc_msg) {
         var conn = ConnMgr.get_conn_from_conn_map(country, state, city, source);
         if (conn == null) {
             log.error("Error: Proxy not connected to client %s. " +
-                        "Failed to forward the messaage from Controller.",
+                        "Failed to forward the messaage from server.",
                         source);
             return;
         }
@@ -48,14 +48,19 @@ var handle_msg_from_client = function(ws, req, msg) {
     var proxy_msg = ServerProxy.ProxyMsg.getRootAsProxyMsg(buf);
     var header = proxy_msg.header();
     var payload_type = proxy_msg.payloadType();
+    var payload;
     var country = header.country();
     var state = header.state();
     var city = header.city();
-    var secret_key = header.secretkey();
-    var source = header.source()
+    var source = header.source();
+    var dest = header.dest();
 
-    log.debug("Received message from client...");
-    if (payload_type == ControllerProxy.Payload.AuthReqMsg) {
+    log.info("Received message from client '%s', country '%s', state '%s', city '%s'",
+        source, country, state, city);
+    if (payload_type == ServerProxy.Payload.AuthReqMsg) {
+        var auth_req = proxy_msg.payload(new ServerProxy.AuthReqMsg());
+        var secret_key = auth_req.secretkey();
+        log.info("Secret key is '%s'", secret_key);
         /* Store the websocket in order to reply back the
         * server message back to client
         */
@@ -81,7 +86,7 @@ var handle_msg_from_client = function(ws, req, msg) {
 
         // Verify client info
         if (secret_key == null) {
-            log.error("Wrong secret key: %s", secret_key);
+            log.error("Wrong secret key: '%s'", secret_key);
             ws.close();
             return;
         }
@@ -107,7 +112,7 @@ var handle_msg_from_client = function(ws, req, msg) {
         } else {
             /* Client provided wrong secret-key */
             var fb = proxy_fb_handle.get_auth_resp_fb(header, false);
-            log.info("Sent authentication failure response for conn id: %s", ws._ultron.id);
+            log.info("Sent authentication failure response for conn id");
             ws.send(fb, function (err) {
                 if (err) {
                     log.error("Failed to send auth-fail message to client %s, country " +
@@ -139,20 +144,20 @@ var handle_msg_from_client = function(ws, req, msg) {
         var to_svc_channel = hdr_channel + "/to_service"
 
         /* Subsribe to channel to received messages from service's of server */
-        redis_conn.subscribe_channel(from_svc_channel, handle_msg_from_svc);
+        //redis_conn.subscribe_channel(from_svc_channel, handle_msg_from_svc);
 
         /* Publish the msg on to the channel for controller service.
         * Also encode the msg using base64
         */
         var enc_msg = new Buffer(msg).toString('base64');
-        redis_conn.publish(to_svc_channel, enc_msg);
+        //redis_conn.publish(to_svc_channel, enc_msg);
 
         log.info("Published client message on redis channel %s.",
                     to_svc_channel);  
     }
 }
 
-app.ws('/control', function(ws, req) {
+app.ws('/butler', function(ws, req) {
     ws.on('message', function(msg) {
         log.debug("received client message")
         try {

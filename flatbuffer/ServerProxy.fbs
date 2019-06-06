@@ -1,4 +1,5 @@
-include "ResponseMessage.fbs";
+include "ResponseFood.fbs";
+include "ResponseCoupon.fbs";
 
 namespace ServerProxy;
 
@@ -34,7 +35,7 @@ table AuthRespMsg {
     status:int;
 }
 
-union Payload {AuthReqMsg, AuthRespMsg, ResponseMessage.ResponseMsg}
+union Payload {AuthReqMsg, AuthRespMsg, ResponseFood.ResponseFoodMsg, ResponseCoupon.ResponseCouponMsg}
 
 table ProxyMsg {
     header:Header;

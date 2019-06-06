@@ -1,8 +1,0 @@
-namespace ResponseMessage;
-
-table ResponseMsg {
-    c2a_version:uint;            
-    incarnation_ts:string;
-}
-
-root_type ResponseMsg;

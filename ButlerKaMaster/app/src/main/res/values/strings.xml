@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ButlerKaMaster</string>
+    <string name="tab_text_1">North Indian</string>
+    <string name="tab_text_2">South Indian</string>
+</resources>

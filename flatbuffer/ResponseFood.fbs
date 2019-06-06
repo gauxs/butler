@@ -1,0 +1,30 @@
+namespace ResponseFood;
+
+table item {
+    name: string;
+    price: float;
+}
+
+table cuisine {
+    name: string;
+    item_list: [item];
+}
+
+table app {
+    app_name: string;
+    cuisine_list: [cuisine];
+}
+
+table Restaurant {
+    res_name: string;
+    res_rating: string;
+    res_distance: string;
+    app_list: [app]; 
+}
+
+table ResponseFoodMsg {
+    res_list: [Restaurant];
+    cuisine: string;
+}
+
+root_type ResponseFoodMsg;
