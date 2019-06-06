@@ -1,5 +1,6 @@
 # Butler
-To install cmake \n
+To install cmake
+
 apt install cmake
 
 To install Flatbuffer
