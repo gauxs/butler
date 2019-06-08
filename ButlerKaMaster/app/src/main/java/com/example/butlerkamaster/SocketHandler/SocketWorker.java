@@ -1,8 +1,6 @@
-package com.example.butlerkamaster.ui.main;
+package com.example.butlerkamaster.SocketHandler;
 
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;

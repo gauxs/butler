@@ -1,6 +1,7 @@
 package com.example.butlerkamaster.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.widget.Toast;
 
 import com.example.butlerkamaster.R;
 
@@ -45,14 +47,13 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
-        final TextView textView = root.findViewById(R.id.section_label);
-        pageViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root;
+        if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
+            root = inflater.inflate(R.layout.fragment_1, container, false);
+        }else{
+            root = inflater.inflate(R.layout.fragment_2, container, false);
+        }
+
         return root;
     }
 }
