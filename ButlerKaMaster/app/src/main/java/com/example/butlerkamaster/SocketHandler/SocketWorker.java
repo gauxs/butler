@@ -9,15 +9,13 @@ import okio.ByteString;
 public class SocketWorker extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     String tag = "SocketWorker";
-//    @Override
-//    public void onOpen(WebSocket webSocket, Response response) {
-//        webSocket.send("Hello, it's SSaurel !");
-//        webSocket.send("What's up ?");
-//        webSocket.send(ByteString.decodeHex("deadbeef"));
-//        webSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye !");
-//    }
+    @Override
+    public void onOpen(WebSocket webSocket, Response response) {
+        Log.e(tag, "Opening socket");
+    }
     @Override
     public void onMessage(WebSocket webSocket, String text) {
+
         Log.i(tag,"Receiving : "+ text);
     }
     @Override
