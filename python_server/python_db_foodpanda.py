@@ -6,7 +6,7 @@ import collections
 
 def get_request_from_user():
     # creating dummy req 
-    temp = {'Bread': 1, 'Rice': 1, 'Curry': 1} 
+    temp = {'Bread': 1, 'Rice': 1, 'Curry': 0} 
     return temp
 
 def get_min_price_values():
@@ -40,7 +40,8 @@ def response_from_server (min_value_rest, user_data):
         local_dict = {}
         total_amount = 0
         for utype, uval in user_data.items():
-            if uval and utype in rvalue.keys(): 
+            if uval != 0 and utype in rvalue.keys(): 
+                print uval, utype
                 local_dict.update(rvalue[utype])
                 for k in rvalue[utype].keys():
                     price = rvalue[utype][k]
@@ -66,6 +67,7 @@ def main():
   
     # send result 
     response_dict = response_from_server(min_value_rest, user_data)
+    print response_dict
 
 if __name__ == "__main__":
     main()
