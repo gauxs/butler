@@ -1,13 +1,23 @@
 # Butler
-**To install cmake**<br/>
-apt install cmake<br/>
 
-**To install Flatbuffer**<br/>
-cd tools/<br/>
-git clone https://github.com/google/flatbuffers.git<br/>
-cd flatbuffers<br/>
-cmake -G "Unix Makefiles" (install cmake if need)<br/>
-make<br/>
+Butler is a hackathon project we implemented at [Riverbed](https://www.riverbed.com/) hackathon of 2019.
+
+## Installation
+
+1. cmake
+
+   ```
+   apt install cmake<br/>
+   ```
+
+2. Flatbuffer
+
+   ```cd tools/<br/>
+   git clone https://github.com/google/flatbuffers.git<br/>
+   cd flatbuffers<br/>
+   cmake -G "Unix Makefiles" (install cmake if need)<br/>
+   make
+   ```
 
 **To install npm & required modules**<br/>
 apt install npm<br/>
