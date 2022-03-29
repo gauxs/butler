@@ -1,6 +1,6 @@
 # Butler
 
-Butler is a hackathon project we implemented at [Riverbed](https://www.riverbed.com/) hackathon of 2019.
+Butler is a hackathon project we implemented at [Riverbed Hackathon](https://www.riverbed.com/) of 2019. Butler is a system which collects and store data like restaurant details, location, food menu and price, from food delivery websites like FoodPanda, Zomato through a web crawler and answer queries like cheapest meal plan.
 
 ## Installation
 
