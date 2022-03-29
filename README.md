@@ -39,3 +39,7 @@ Butler is a hackathon project we implemented at [Riverbed Hackathon](https://www
    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
    sudo apt-get install -y nodejs
    ```
+
+## Conclusion
+
+Although we didn't won the hackathon but did got special mention :grin:
