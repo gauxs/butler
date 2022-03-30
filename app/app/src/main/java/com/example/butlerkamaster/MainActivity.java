@@ -9,7 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.example.butlerkamaster.ClientRequestHandler.ClientRequest;
 import com.example.butlerkamaster.ui.main.SectionsPagerAdapter;
@@ -32,11 +34,13 @@ import okhttp3.WebSocket;
 public class MainActivity extends AppCompatActivity {
     private OkHttpClient client;
     Socket socket;
-
+    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+            "WebOS","Ubuntu","Windows7","Max OS X"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //setContentView(R.layout.fragment_1);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -44,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                R.layout.activity_listview, mobileArray);
+
+        ListView listView = (ListView) findViewById(R.id.mobile_list);
+        listView.setAdapter(adapter);
+
+        //setContentView(R.layout.activity_main);
         client = new OkHttpClient();
 
         fab.setOnClickListener(new View.OnClickListener() {
